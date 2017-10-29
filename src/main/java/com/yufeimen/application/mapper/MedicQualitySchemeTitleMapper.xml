@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicQualitySchemeTitleMapper">
+    <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicQualitySchemeTitle">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="equipment_category" property="equipmentCategory" jdbcType="VARCHAR"/>
+        <result column="total_grade" property="totalGrade" jdbcType="INTEGER"/>
+        <result column="scheme_maker" property="schemeMaker" jdbcType="VARCHAR"/>
+        <result column="sampling_maker" property="samplingMaker" jdbcType="VARCHAR"/>
+        <result column="sampling_status" property="samplingStatus" jdbcType="VARCHAR"/>
+        <result column="evaluate_status" property="evaluateStatus" jdbcType="VARCHAR"/>
+        <result column="rule_grade_json" property="ruleGradeJSON" jdbcType="LONGVARCHAR"/>
+        <result column="monitor_ids" property="monitorIds" jdbcType="LONGVARCHAR"/>
+        <result column="extra_info" property="extraInfo" jdbcType="LONGVARCHAR"/>
+        <result column="sample_count" property="sampleCount" jdbcType="INTEGER"/>
+        <result column="sample_range_during" property="sampleRangeDuring" jdbcType="VARCHAR"/>
+        <result column="sample_range_harm_or_not" property="sampleRangeHarmOrNot" jdbcType="VARCHAR"/>
+        <result column="sample_range_org" property="sampleRangeOrg" jdbcType="INTEGER"/>
+        <result column="sample_range_org_name" property="sampleRangeOrgName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, name, equipment_category, 
+    total_grade, scheme_maker, sampling_maker, sampling_status, evaluate_status, rule_grade_json, monitor_ids, extra_info,
+    sample_count,sample_range_during,sample_range_harm_or_not,sample_range_org,sample_range_org_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select  *
+    from MEDIC_QUALITY_SCHEME_TITLE
+    where id = #{id,jdbcType=INTEGER}
+    AND is_deleted = 'N'
+  </select>
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update MEDIC_QUALITY_SCHEME_TITLE
+    SET is_deleted = 'Y'
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <insert id="insertSchemeTitle" parameterType="com.yufeimen.application.model.MedicQualitySchemeTitle">
+    insert into MEDIC_QUALITY_SCHEME_TITLE (
+        id,
+        gmt_created,
+        gmt_creator,
+        gmt_updated,
+        gmt_updator,
+        is_deleted,
+        name,
+        equipment_category,
+        total_grade,
+        scheme_maker,
+        rule_grade_json,
+        extra_info)
+    values (
+        null,
+        null,
+        #{schemeMaker},
+        null,
+        #{schemeMaker},
+        'N',
+        #{name},
+        #{equipmentCategory},
+        #{totalGrade},
+        #{schemeMaker},
+        #{ruleGradeJSON},
+        #{extraInfo})
+  </insert>
+
+    <select id="queryQualityEvaluateSchemeByConditions" resultMap="BaseResultMap">
+        select * from MEDIC_QUALITY_SCHEME_TITLE
+        where is_deleted = 'N'
+        <if test="schemeName != null and schemeName !=''">
+            AND NAME LIKE CONCAT('%','${schemeName}','%' )
+        </if>
+        <choose>
+            <when test="samplingStatus == 'ALL'">
+            </when>
+            <otherwise>
+                AND SAMPLING_STATUS = #{samplingStatus}
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="equipmentCategory == 'ALL'">
+            </when>
+            <otherwise>
+                AND EQUIPMENT_CATEGORY = #{equipmentCategory}
+            </otherwise>
+        </choose>
+        ORDER BY EVALUATE_STATUS DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countQualityEvaluateSchemeByConditions" resultType="int">
+        select COUNT(*) from MEDIC_QUALITY_SCHEME_TITLE
+        where is_deleted = 'N'
+        <if test="schemeName != null and schemeName !=''">
+            AND NAME LIKE CONCAT('%','${schemeName}','%' )
+        </if>
+        <choose>
+            <when test="samplingStatus == 'ALL'">
+            </when>
+            <otherwise>
+                AND SAMPLING_STATUS = #{samplingStatus}
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="equipmentCategory == 'ALL'">
+            </when>
+            <otherwise>
+                AND EQUIPMENT_CATEGORY = #{equipmentCategory}
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="updateSampleResultById">
+        update MEDIC_QUALITY_SCHEME_TITLE
+        set
+        sample_range_org = #{sampleRangeOrg},
+        sample_range_org_name = #{sampleRangeOrgName},
+        sample_range_during = #{sampleRangeDuring},
+        sample_range_harm_or_not = #{sampleRangeHarmOrNot},
+        sample_count = #{sampleCount},
+        sampling_maker = #{samplingMaker},
+        monitor_ids = #{monitorIds},
+        sampling_status = '已抽样'
+        where ID = #{id}
+    </update>
+
+    <update id="updateQualityEvaluateStatusById">
+        update MEDIC_QUALITY_SCHEME_TITLE
+        set evaluate_status = #{evaluateStatus}
+        where ID = #{schemeId}
+    </update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

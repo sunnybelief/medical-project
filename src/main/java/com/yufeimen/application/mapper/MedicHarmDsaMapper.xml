@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicHarmDsaMapper">
+    <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicHarmDsa">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
+        <result column="observe_id" property="observeId" jdbcType="INTEGER"/>
+        <result column="equipment_id" property="equipmentId" jdbcType="INTEGER"/>
+        <result column="equipment_category" property="equipmentCategory" jdbcType="VARCHAR"/>
+        <result column="report_org_id" property="reportOrgId" jdbcType="INTEGER"/>
+        <result column="report_org_name" property="reportOrgName" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="harm_happen_time_select" property="harmHappenTimeSelect" jdbcType="VARCHAR"/>
+        <result column="harm_course_select" property="harmCourseSelect" jdbcType="VARCHAR"/>
+        <result column="harm_process_select" property="harmProcessSelect" jdbcType="VARCHAR"/>
+        <result column="harm_process_stop_during" property="harmProcessStopDuring" jdbcType="VARCHAR"/>
+        <result column="harm_level_select" property="harmLevelSelect" jdbcType="VARCHAR"/>
+        <result column="harm_terrible_level_select" property="harmTerribleLevelSelect" jdbcType="VARCHAR"/>
+        <result column="harm_result_select" property="harmResultSelect" jdbcType="VARCHAR"/>
+        <result column="harm_result_recovery_time" property="harmResultRecoveryTime" jdbcType="VARCHAR"/>
+        <result column="harm_result_died_time" property="harmResultDiedTime" jdbcType="VARCHAR"/>
+        <result column="harm_original_select" property="harmOriginalSelect" jdbcType="VARCHAR"/>
+        <result column="harm_original_died_time" property="harmOriginalDiedTime" jdbcType="VARCHAR"/>
+        <result column="harm_self_relative_evaluate1" property="harmSelfRelativeEvaluate1" jdbcType="VARCHAR"/>
+        <result column="harm_self_relative_evaluate2" property="harmSelfRelativeEvaluate2" jdbcType="VARCHAR"/>
+        <result column="harm_self_relative_evaluate3" property="harmSelfRelativeEvaluate3" jdbcType="VARCHAR"/>
+        <result column="harm_self_relative_result" property="harmSelfRelativeResult" jdbcType="VARCHAR"/>
+        <result column="reportor_id" property="reportorId" jdbcType="INTEGER"/>
+        <result column="reportor_name" property="reportorName" jdbcType="VARCHAR"/>
+        <result column="superior_relative_evaluate1" property="superiorRelativeEvaluate1" jdbcType="VARCHAR"/>
+        <result column="superior_relative_evaluate2" property="superiorRelativeEvaluate2" jdbcType="VARCHAR"/>
+        <result column="superior_relative_evaluate3" property="superiorRelativeEvaluate3" jdbcType="VARCHAR"/>
+        <result column="superior_relative_result" property="superiorRelativeResult" jdbcType="VARCHAR"/>
+        <result column="technology_is_harm_situation" property="technologyIsHarmSituation" jdbcType="VARCHAR"/>
+        <result column="technology_process_tip" property="technologyProcessTip" jdbcType="VARCHAR"/>
+        <result column="harm_course_description" property="harmCourseDescription" jdbcType="LONGVARCHAR"/>
+        <result column="harm_process_description" property="harmProcessDescription" jdbcType="LONGVARCHAR"/>
+        <result column="harm_reason_text" property="harmReasonText" jdbcType="LONGVARCHAR"/>
+        <result column="harm_equipment_repair" property="harmEquipmentRepair" jdbcType="LONGVARCHAR"/>
+        <result column="harm_result_sequela" property="harmResultSequela" jdbcType="LONGVARCHAR"/>
+        <result column="harm_result_died_reason" property="harmResultDiedReason" jdbcType="LONGVARCHAR"/>
+        <result column="harm_original_sequela" property="harmOriginalSequela" jdbcType="LONGVARCHAR"/>
+        <result column="technology_tip_description" property="technologyTipDescription" jdbcType="LONGVARCHAR"/>
+        <result column="evaluator_name" property="evaluatorName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, observe_id, equipment_id, 
+    equipment_category, report_org_id, report_org_name, patient_name, harm_happen_time_select, 
+    harm_course_select, harm_process_select, harm_process_stop_during, harm_level_select, 
+    harm_terrible_level_select, harm_result_select, harm_result_recovery_time, harm_result_died_time, 
+    harm_original_select, harm_original_died_time, harm_self_relative_evaluate1, harm_self_relative_evaluate2, 
+    harm_self_relative_evaluate3, harm_self_relative_result, reportor_id, reportor_name, 
+    superior_relative_evaluate1, superior_relative_evaluate2, superior_relative_evaluate3, 
+    superior_relative_result, technology_is_harm_situation, technology_process_tip,
+    harm_course_description, harm_process_description, harm_reason_text, harm_equipment_repair, 
+    harm_result_sequela, harm_result_died_reason, harm_original_sequela, technology_tip_description,evaluator_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from MEDIC_HARM_DSA
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from MEDIC_HARM_DSA
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.yufeimen.application.model.MedicHarmDsa">
+    insert into MEDIC_HARM_DSA (id, gmt_created, gmt_creator, 
+      gmt_updated, gmt_updator, is_deleted, 
+      observe_id, equipment_id, equipment_category, 
+      report_org_id, report_org_name, patient_name, 
+      harm_happen_time_select, harm_course_select, 
+      harm_process_select, harm_process_stop_during, 
+      harm_level_select, harm_terrible_level_select, 
+      harm_result_select, harm_result_recovery_time, 
+      harm_result_died_time, harm_original_select, 
+      harm_original_died_time, harm_self_relative_evaluate1, 
+      harm_self_relative_evaluate2, harm_self_relative_evaluate3, 
+      harm_self_relative_result, reportor_id, reportor_name, 
+      superior_relative_evaluate1, superior_relative_evaluate2, 
+      superior_relative_evaluate3, superior_relative_result, 
+      technology_is_harm_situation, technology_process_tip, 
+      harm_course_description, harm_process_description, 
+      harm_reason_text, harm_equipment_repair, 
+      harm_result_sequela, harm_result_died_reason, 
+      harm_original_sequela, technology_tip_description,evaluator_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=VARCHAR}, 
+      #{gmtUpdated,jdbcType=TIMESTAMP}, #{gmtUpdator,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, 
+      #{observeId,jdbcType=INTEGER}, #{equipmentId,jdbcType=INTEGER}, #{equipmentCategory,jdbcType=VARCHAR}, 
+      #{reportOrgId,jdbcType=INTEGER}, #{reportOrgName,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, 
+      #{harmHappenTimeSelect,jdbcType=VARCHAR}, #{harmCourseSelect,jdbcType=VARCHAR}, 
+      #{harmProcessSelect,jdbcType=VARCHAR}, #{harmProcessStopDuring,jdbcType=VARCHAR}, 
+      #{harmLevelSelect,jdbcType=VARCHAR}, #{harmTerribleLevelSelect,jdbcType=VARCHAR}, 
+      #{harmResultSelect,jdbcType=VARCHAR}, #{harmResultRecoveryTime,jdbcType=VARCHAR}, 
+      #{harmResultDiedTime,jdbcType=VARCHAR}, #{harmOriginalSelect,jdbcType=VARCHAR}, 
+      #{harmOriginalDiedTime,jdbcType=VARCHAR}, #{harmSelfRelativeEvaluate1,jdbcType=VARCHAR}, 
+      #{harmSelfRelativeEvaluate2,jdbcType=VARCHAR}, #{harmSelfRelativeEvaluate3,jdbcType=VARCHAR}, 
+      #{harmSelfRelativeResult,jdbcType=VARCHAR}, #{reportorId,jdbcType=INTEGER}, #{reportorName,jdbcType=VARCHAR}, 
+      #{superiorRelativeEvaluate1,jdbcType=VARCHAR}, #{superiorRelativeEvaluate2,jdbcType=VARCHAR}, 
+      #{superiorRelativeEvaluate3,jdbcType=VARCHAR}, #{superiorRelativeResult,jdbcType=VARCHAR}, 
+      #{technologyIsHarmSituation,jdbcType=VARCHAR}, #{technologyProcessTip,jdbcType=VARCHAR}, 
+      #{harmCourseDescription,jdbcType=LONGVARCHAR}, #{harmProcessDescription,jdbcType=LONGVARCHAR}, 
+      #{harmReasonText,jdbcType=LONGVARCHAR}, #{harmEquipmentRepair,jdbcType=LONGVARCHAR}, 
+      #{harmResultSequela,jdbcType=LONGVARCHAR}, #{harmResultDiedReason,jdbcType=LONGVARCHAR}, 
+      #{harmOriginalSequela,jdbcType=LONGVARCHAR}, #{technologyTipDescription,jdbcType=LONGVARCHAR},
+      #{evaluatorName,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.yufeimen.application.model.MedicHarmDsa">
+    update MEDIC_HARM_DSA
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      observe_id = #{observeId,jdbcType=INTEGER},
+      equipment_id = #{equipmentId,jdbcType=INTEGER},
+      equipment_category = #{equipmentCategory,jdbcType=VARCHAR},
+      report_org_id = #{reportOrgId,jdbcType=INTEGER},
+      report_org_name = #{reportOrgName,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      harm_happen_time_select = #{harmHappenTimeSelect,jdbcType=VARCHAR},
+      harm_course_select = #{harmCourseSelect,jdbcType=VARCHAR},
+      harm_process_select = #{harmProcessSelect,jdbcType=VARCHAR},
+      harm_process_stop_during = #{harmProcessStopDuring,jdbcType=VARCHAR},
+      harm_level_select = #{harmLevelSelect,jdbcType=VARCHAR},
+      harm_terrible_level_select = #{harmTerribleLevelSelect,jdbcType=VARCHAR},
+      harm_result_select = #{harmResultSelect,jdbcType=VARCHAR},
+      harm_result_recovery_time = #{harmResultRecoveryTime,jdbcType=VARCHAR},
+      harm_result_died_time = #{harmResultDiedTime,jdbcType=VARCHAR},
+      harm_original_select = #{harmOriginalSelect,jdbcType=VARCHAR},
+      harm_original_died_time = #{harmOriginalDiedTime,jdbcType=VARCHAR},
+      harm_self_relative_evaluate1 = #{harmSelfRelativeEvaluate1,jdbcType=VARCHAR},
+      harm_self_relative_evaluate2 = #{harmSelfRelativeEvaluate2,jdbcType=VARCHAR},
+      harm_self_relative_evaluate3 = #{harmSelfRelativeEvaluate3,jdbcType=VARCHAR},
+      harm_self_relative_result = #{harmSelfRelativeResult,jdbcType=VARCHAR},
+      reportor_id = #{reportorId,jdbcType=INTEGER},
+      reportor_name = #{reportorName,jdbcType=VARCHAR},
+      superior_relative_evaluate1 = #{superiorRelativeEvaluate1,jdbcType=VARCHAR},
+      superior_relative_evaluate2 = #{superiorRelativeEvaluate2,jdbcType=VARCHAR},
+      superior_relative_evaluate3 = #{superiorRelativeEvaluate3,jdbcType=VARCHAR},
+      superior_relative_result = #{superiorRelativeResult,jdbcType=VARCHAR},
+      technology_is_harm_situation = #{technologyIsHarmSituation,jdbcType=VARCHAR},
+      technology_process_tip = #{technologyProcessTip,jdbcType=VARCHAR},
+      harm_course_description = #{harmCourseDescription},
+      harm_process_description = #{harmProcessDescription},
+      harm_reason_text = #{harmReasonText},
+      harm_equipment_repair = #{harmEquipmentRepair},
+      harm_result_sequela = #{harmResultSequela},
+      harm_result_died_reason = #{harmResultDiedReason},
+      harm_original_sequela = #{harmOriginalSequela},
+      technology_tip_description = #{technologyTipDescription},
+      evaluator_name = #{evaluatorName}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteAllDSAHarmTempReport">
+        update MEDIC_HARM_DSA,MEDIC_MONITOR_DSA
+        set MEDIC_HARM_DSA.IS_DELETED = 'Y',
+            MEDIC_MONITOR_DSA.IS_DELETED = 'Y'
+        where MEDIC_HARM_DSA.ID = MEDIC_MONITOR_DSA.ACCIDENT_ID
+        AND MEDIC_MONITOR_DSA.STATUS = '暂存'
+  </update>
+
+    <update id="deleteDSAHarmReportById">
+        UPDATE MEDIC_HARM_DSA
+        SET IS_DELETED = 'Y'
+        WHERE  ID= #{accidentId}
+    </update>
+
+    <update id="updateDSAHarmEvaluateInfo">
+        UPDATE MEDIC_HARM_DSA
+        SET EVALUATOR_NAME =#{evaluatorName},
+            SUPERIOR_RELATIVE_EVALUATE1 =#{superiorRelativeEvaluate1},
+            SUPERIOR_RELATIVE_EVALUATE2 =#{superiorRelativeEvaluate2},
+            SUPERIOR_RELATIVE_EVALUATE3 =#{superiorRelativeEvaluate3},
+            SUPERIOR_RELATIVE_RESULT =#{superiorRelativeResult},
+            TECHNOLOGY_IS_HARM_SITUATION =#{technologyIsHarmSituation},
+            TECHNOLOGY_PROCESS_TIP =#{technologyProcessTip},
+            TECHNOLOGY_TIP_DESCRIPTION =#{technologyTipDescription}
+        WHERE  ID= #{accidentId}
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicAuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicAuthority" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+    <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR" />
+    <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP" />
+    <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="function_code" property="functionCode" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="roles" property="roles" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, function_code, 
+    description, roles
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MEDIC_AUTHORITY
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MEDIC_AUTHORITY
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufeimen.application.model.MedicAuthority" >
+    insert into MEDIC_AUTHORITY (id, gmt_created, gmt_creator, 
+      gmt_updated, gmt_updator, is_deleted, 
+      function_code, description, roles
+      )
+    values (#{id,jdbcType=INTEGER}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=VARCHAR}, 
+      #{gmtUpdated,jdbcType=TIMESTAMP}, #{gmtUpdator,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, 
+      #{functionCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufeimen.application.model.MedicAuthority" >
+    insert into MEDIC_AUTHORITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created,
+      </if>
+      <if test="gmtCreator != null" >
+        gmt_creator,
+      </if>
+      <if test="gmtUpdated != null" >
+        gmt_updated,
+      </if>
+      <if test="gmtUpdator != null" >
+        gmt_updator,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="functionCode != null" >
+        function_code,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="roles != null" >
+        roles,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreated != null" >
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null" >
+        #{gmtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtUpdated != null" >
+        #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdator != null" >
+        #{gmtUpdator,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="functionCode != null" >
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        #{roles,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufeimen.application.model.MedicAuthority" >
+    update MEDIC_AUTHORITY
+    <set >
+      <if test="gmtCreated != null" >
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null" >
+        gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtUpdated != null" >
+        gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdator != null" >
+        gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="functionCode != null" >
+        function_code = #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufeimen.application.model.MedicAuthority" >
+    update MEDIC_AUTHORITY
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      function_code = #{functionCode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

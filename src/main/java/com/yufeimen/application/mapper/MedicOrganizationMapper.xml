@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicOrganizationMapper">
+    <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicOrganization">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="org_level" property="orgLevel" jdbcType="VARCHAR"/>
+        <result column="higher_org" property="higherOrg" jdbcType="INTEGER"/>
+        <result column="hospital_degree" property="hospitalDegree" jdbcType="VARCHAR"/>
+        <result column="address_city" property="addressCity" jdbcType="VARCHAR"/>
+        <result column="is_active" property="isActive" jdbcType="CHAR"/>
+        <result column="postal_code" property="postalCode" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="fax" property="fax" jdbcType="VARCHAR"/>
+        <result column="legal_person" property="legalPerson" jdbcType="VARCHAR"/>
+        <result column="extra_info" property="extraInfo" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, org_name, org_level, 
+    higher_org, hospital_degree, address_city, is_active, postal_code, email, contacts, 
+    phone_number, address, fax, legal_person,
+    extra_info
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDIC_ORGANIZATION
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getOrganizationByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDIC_ORGANIZATION
+        where org_level = #{level}
+    </select>
+
+    <select id="getOrganizationBySelect" parameterType="com.yufeimen.application.vo.MedicOrganizationVo"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from MEDIC_ORGANIZATION
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="orgLevel != null and orgLevel.length() >0">AND org_level=#{orgLevel}</if>
+            <if test="orgName != null and orgName.length()>0">AND org_name=#{orgName}</if>
+            <if test="hospitalDegree != null and hospitalDegree.length()>0">AND hospital_degree=#{hospitalDegree}</if>
+            <if test="addressCity != null and addressCity.length()>0">AND address_city=#{addressCity}</if>
+            <if test="higherOrg != null and higherOrg >0">AND higher_org=#{higherOrg}</if>
+            <if test="isActive != null and isActive.length() >0">AND is_active=#{isActive}</if>
+        </trim>
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+      delete from MEDIC_ORGANIZATION
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.yufeimen.application.model.MedicOrganization">
+    insert into MEDIC_ORGANIZATION (id, gmt_created, gmt_creator, 
+      gmt_updated, gmt_updator, is_deleted, 
+      org_name, org_level, higher_org, 
+      hospital_degree, address_city, is_active, 
+      postal_code, email, contacts, 
+      phone_number, address, fax, 
+      legal_person, extra_info)
+    values (#{id,jdbcType=INTEGER}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=VARCHAR}, 
+      #{gmtUpdated,jdbcType=TIMESTAMP}, #{gmtUpdator,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgLevel,jdbcType=VARCHAR}, #{higherOrg,jdbcType=INTEGER}, 
+      #{hospitalDegree,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, #{isActive,jdbcType=CHAR}, 
+      #{postalCode,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{extraInfo,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yufeimen.application.model.MedicOrganization">
+        insert into MEDIC_ORGANIZATION
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreated != null">
+                gmt_created,
+            </if>
+            <if test="gmtCreator != null">
+                gmt_creator,
+            </if>
+            <if test="gmtUpdated != null">
+                gmt_updated,
+            </if>
+            <if test="gmtUpdator != null">
+                gmt_updator,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="orgLevel != null">
+                org_level,
+            </if>
+            <if test="higherOrg != null">
+                higher_org,
+            </if>
+            <if test="hospitalDegree != null">
+                hospital_degree,
+            </if>
+            <if test="addressCity != null">
+                address_city,
+            </if>
+            <if test="isActive != null">
+                is_active,
+            </if>
+            <if test="postalCode != null">
+                postal_code,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="contacts != null">
+                contacts,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="legalPerson != null">
+                legal_person,
+            </if>
+            <if test="extraInfo != null">
+                extra_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreated != null">
+                #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreator != null">
+                #{gmtCreator,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdated != null">
+                #{gmtUpdated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtUpdator != null">
+                #{gmtUpdator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgLevel != null">
+                #{orgLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="higherOrg != null">
+                #{higherOrg,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalDegree != null">
+                #{hospitalDegree,jdbcType=VARCHAR},
+            </if>
+            <if test="addressCity != null">
+                #{addressCity,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                #{isActive,jdbcType=CHAR},
+            </if>
+            <if test="postalCode != null">
+                #{postalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null">
+                #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPerson != null">
+                #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="extraInfo != null">
+                #{extraInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yufeimen.application.model.MedicOrganization">
+        update MEDIC_ORGANIZATION
+        <set>
+            <if test="gmtCreated != null">
+                gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreator != null">
+                gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdated != null">
+                gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtUpdator != null">
+                gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgLevel != null">
+                org_level = #{orgLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="higherOrg != null">
+                higher_org = #{higherOrg,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalDegree != null">
+                hospital_degree = #{hospitalDegree,jdbcType=VARCHAR},
+            </if>
+            <if test="addressCity != null">
+                address_city = #{addressCity,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                is_active = #{isActive,jdbcType=CHAR},
+            </if>
+            <if test="postalCode != null">
+                postal_code = #{postalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null">
+                contacts = #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPerson != null">
+                legal_person = #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="extraInfo != null">
+                extra_info = #{extraInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yufeimen.application.model.MedicOrganization">
+    update MEDIC_ORGANIZATION
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_level = #{orgLevel,jdbcType=VARCHAR},
+      higher_org = #{higherOrg,jdbcType=INTEGER},
+      hospital_degree = #{hospitalDegree,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=CHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR}，
+      extra_info = #{extraInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getAllOrganization" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_ORGANIZATION
+        WHERE IS_DELETED = 'N'
+        <if test="term != null and term !=''">
+            AND ORG_NAME LIKE CONCAT('%','${term}','%' )
+        </if>
+        AND ORG_LEVEL = #{orgLevel}
+        AND IS_ACTIVE = 'Y'
+    </select>
+
+    <select id="getAllHospitalForSelect2" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_ORGANIZATION
+        WHERE IS_DELETED = 'N'
+        <if test="term != null and term !=''">
+            AND ORG_NAME LIKE CONCAT('%','${term}','%' )
+        </if>
+        AND IS_ACTIVE = 'Y'
+        AND ORG_LEVEL = 'HOSPITAL'
+    </select>
+
+    <select id="getAllCityOrgListForSelect2" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_ORGANIZATION
+        WHERE IS_DELETED = 'N'
+        AND ORG_LEVEL = 'CITY'
+    </select>
+
+    <select id="getLowHospitalOrgIds" resultType="int">
+        SELECT id FROM MEDIC_ORGANIZATION
+        WHERE IS_DELETED = 'N'
+        AND higher_org = #{orgId}
+        AND ORG_LEVEL = 'HOSPITAL'
+        AND IS_ACTIVE = 'Y'
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

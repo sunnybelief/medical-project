@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicEquipmentDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicEquipmentDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+    <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR" />
+    <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP" />
+    <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="belong_org_id" property="belongOrgId" jdbcType="INTEGER" />
+    <result column="regist_number" property="registNumber" jdbcType="VARCHAR" />
+    <result column="model_version" property="modelVersion" jdbcType="VARCHAR" />
+    <result column="product_number" property="productNumber" jdbcType="VARCHAR" />
+    <result column="validity_date" property="validityDate" jdbcType="TIMESTAMP" />
+    <result column="factory_name" property="factoryName" jdbcType="VARCHAR" />
+    <result column="address_city" property="addressCity" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="contactor" property="contactor" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="postal_code" property="postalCode" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yufeimen.application.model.MedicEquipmentDetail" extends="BaseResultMap" >
+    <result column="extra_info" property="extraInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, name, category_id, 
+    category_name, belong_org_id, regist_number, model_version, product_number, validity_date, 
+    factory_name, address_city, address, contactor, phone_number, postal_code, email
+  </sql>
+  <sql id="Blob_Column_List" >
+    extra_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MEDIC_EQUIPMENT_DETAIL
+    where id = #{id,jdbcType=INTEGER} AND IS_DELETED = 'N'
+  </select>
+  <select id="getEquipmentByOrgIdAndCategory" resultMap="BaseResultMap">
+    SELECT * FROM MEDIC_EQUIPMENT_DETAIL
+    WHERE IS_DELETED = 'N'
+    <if test="term != null and term !=''">
+      AND NAME LIKE CONCAT('%','${term}','%' )
+    </if>
+    AND BELONG_ORG_ID = #{orgId}
+    AND CATEGORY_ID=#{categoryId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MEDIC_EQUIPMENT_DETAIL
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufeimen.application.model.MedicEquipmentDetail" >
+    insert into MEDIC_EQUIPMENT_DETAIL (id, gmt_created, gmt_creator, 
+      gmt_updated, gmt_updator, is_deleted, 
+      name, category_id, category_name, 
+      belong_org_id, regist_number, model_version, 
+      product_number, validity_date, factory_name, 
+      address_city, address, contactor, 
+      phone_number, postal_code, email, 
+      extra_info)
+    values (#{id,jdbcType=INTEGER}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=VARCHAR}, 
+      #{gmtUpdated,jdbcType=TIMESTAMP}, #{gmtUpdator,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, 
+      #{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, 
+      #{belongOrgId,jdbcType=INTEGER}, #{registNumber,jdbcType=VARCHAR}, #{modelVersion,jdbcType=VARCHAR}, 
+      #{productNumber,jdbcType=VARCHAR}, #{validityDate,jdbcType=TIMESTAMP}, #{factoryName,jdbcType=VARCHAR}, 
+      #{addressCity,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{contactor,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{extraInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufeimen.application.model.MedicEquipmentDetail" >
+    insert into MEDIC_EQUIPMENT_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreated != null" >
+        gmt_created,
+      </if>
+      <if test="gmtCreator != null" >
+        gmt_creator,
+      </if>
+      <if test="gmtUpdated != null" >
+        gmt_updated,
+      </if>
+      <if test="gmtUpdator != null" >
+        gmt_updator,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="belongOrgId != null" >
+        belong_org_id,
+      </if>
+      <if test="registNumber != null" >
+        regist_number,
+      </if>
+      <if test="modelVersion != null" >
+        model_version,
+      </if>
+      <if test="productNumber != null" >
+        product_number,
+      </if>
+      <if test="validityDate != null" >
+        validity_date,
+      </if>
+      <if test="factoryName != null" >
+        factory_name,
+      </if>
+      <if test="addressCity != null" >
+        address_city,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="contactor != null" >
+        contactor,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="postalCode != null" >
+        postal_code,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="extraInfo != null" >
+        extra_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreated != null" >
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null" >
+        #{gmtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtUpdated != null" >
+        #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdator != null" >
+        #{gmtUpdator,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="belongOrgId != null" >
+        #{belongOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="registNumber != null" >
+        #{registNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="modelVersion != null" >
+        #{modelVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="productNumber != null" >
+        #{productNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="validityDate != null" >
+        #{validityDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factoryName != null" >
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null" >
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null" >
+        #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null" >
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="extraInfo != null" >
+        #{extraInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufeimen.application.model.MedicEquipmentDetail" >
+    update MEDIC_EQUIPMENT_DETAIL
+    <set >
+      <if test="gmtCreated != null" >
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null" >
+        gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtUpdated != null" >
+        gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdator != null" >
+        gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="belongOrgId != null" >
+        belong_org_id = #{belongOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="registNumber != null" >
+        regist_number = #{registNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="modelVersion != null" >
+        model_version = #{modelVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="productNumber != null" >
+        product_number = #{productNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="validityDate != null" >
+        validity_date = #{validityDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factoryName != null" >
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null" >
+        address_city = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null" >
+        contactor = #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null" >
+        postal_code = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="extraInfo != null" >
+        extra_info = #{extraInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yufeimen.application.model.MedicEquipmentDetail" >
+    update MEDIC_EQUIPMENT_DETAIL
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      belong_org_id = #{belongOrgId,jdbcType=INTEGER},
+      regist_number = #{registNumber,jdbcType=VARCHAR},
+      model_version = #{modelVersion,jdbcType=VARCHAR},
+      product_number = #{productNumber,jdbcType=VARCHAR},
+      validity_date = #{validityDate,jdbcType=TIMESTAMP},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contactor = #{contactor,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      extra_info = #{extraInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufeimen.application.model.MedicEquipmentDetail" >
+    update MEDIC_EQUIPMENT_DETAIL
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      belong_org_id = #{belongOrgId,jdbcType=INTEGER},
+      regist_number = #{registNumber,jdbcType=VARCHAR},
+      model_version = #{modelVersion,jdbcType=VARCHAR},
+      product_number = #{productNumber,jdbcType=VARCHAR},
+      validity_date = #{validityDate,jdbcType=TIMESTAMP},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contactor = #{contactor,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

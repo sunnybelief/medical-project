@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicUserMapper">
+    <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="org_id" property="orgId" jdbcType="INTEGER"/>
+        <result column="account_role" property="accountRole" jdbcType="VARCHAR"/>
+        <result column="is_active" property="isActive" jdbcType="CHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_key" property="accountKey" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, gmt_created, gmt_creator, gmt_updated, gmt_updator, is_deleted, name, sex, org_id, 
+    account_role, is_active, account_name, account_key, email, phone_number, address
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDIC_USER
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectUserByAccountName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDIC_USER
+        where account_name = #{accountName}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from MEDIC_USER
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.yufeimen.application.model.MedicUser">
+    insert into MEDIC_USER (id, gmt_created, gmt_creator, 
+      gmt_updated, gmt_updator, is_deleted, 
+      name, sex, org_id, account_role, 
+      is_active, account_name, account_key, 
+      email, phone_number, address
+      )
+    values (#{id,jdbcType=INTEGER}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=VARCHAR}, 
+      #{gmtUpdated,jdbcType=TIMESTAMP}, #{gmtUpdator,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{accountRole,jdbcType=VARCHAR}, 
+      #{isActive,jdbcType=CHAR}, #{accountName,jdbcType=VARCHAR}, #{accountKey,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.yufeimen.application.model.MedicUser">
+        insert into MEDIC_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreated != null">
+                gmt_created,
+            </if>
+            <if test="gmtCreator != null">
+                gmt_creator,
+            </if>
+            <if test="gmtUpdated != null">
+                gmt_updated,
+            </if>
+            <if test="gmtUpdator != null">
+                gmt_updator,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="accountRole != null">
+                account_role,
+            </if>
+            <if test="isActive != null">
+                is_active,
+            </if>
+            <if test="accountName != null">
+                account_name,
+            </if>
+            <if test="accountKey != null">
+                account_key,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreated != null">
+                #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreator != null">
+                #{gmtCreator,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdated != null">
+                #{gmtUpdated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtUpdator != null">
+                #{gmtUpdator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="accountRole != null">
+                #{accountRole,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                #{isActive,jdbcType=CHAR},
+            </if>
+            <if test="accountName != null">
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountKey != null">
+                #{accountKey,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yufeimen.application.model.MedicUser">
+        update MEDIC_USER
+        <set>
+            <if test="gmtCreated != null">
+                gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtCreator != null">
+                gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtUpdated != null">
+                gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtUpdator != null">
+                gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="accountRole != null">
+                account_role = #{accountRole,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                is_active = #{isActive,jdbcType=CHAR},
+            </if>
+            <if test="accountName != null">
+                account_name = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountKey != null">
+                account_key = #{accountKey,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yufeimen.application.model.MedicUser">
+    update MEDIC_USER
+    set gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=VARCHAR},
+      gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP},
+      gmt_updator = #{gmtUpdator,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      account_role = #{accountRole,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=CHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account_key = #{accountKey,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <insert id="registerUserAccount">
+    INSERT INTO MEDIC_USER(
+    ID,
+    GMT_CREATED,
+    GMT_CREATOR,
+    GMT_UPDATED ,
+    GMT_UPDATOR,
+    IS_DELETED,
+    NAME,
+    SEX,
+    ORG_ID,
+    ACCOUNT_ROLE,
+    IS_ACTIVE,
+    ACCOUNT_NAME,
+    ACCOUNT_KEY,
+    EMAIL ,
+    PHONE_NUMBER,
+    ADDRESS)
+    VALUES(
+    null,
+    null,
+    #{register},
+    null,
+    #{register},
+    'N',
+    #{name},
+    #{sex},
+    #{orgId},
+    #{accountRole},
+    'Y',
+    #{email},
+    #{accountKey},
+    #{email},
+    #{phoneNumber},
+    #{address}
+    )
+  </insert>
+
+    <select id="selectUsersByEmail" resultMap="BaseResultMap">
+      SELECT * FROM MEDIC_USER
+      WHERE IS_DELETED = 'N'
+      AND ACCOUNT_NAME = #{email}
+   </select>
+
+    <select id="queryAccountsInfoById" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_USER
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="orgId == -1">
+                AND ACCOUNT_ROLE LIKE CONCAT('%','${orgLevel}','%' )
+                ORDER BY ORG_ID,ACCOUNT_ROLE
+            </when>
+            <otherwise>
+                AND ORG_ID =#{orgId}
+                ORDER BY ACCOUNT_ROLE
+            </otherwise>
+        </choose>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryAccounts" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_USER
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="orgId == -1">
+                AND ACCOUNT_ROLE LIKE CONCAT('%','${orgLevel}','%' )
+            </when>
+            <otherwise>
+                AND ORG_ID =#{orgId}
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="toggleAccountActive">
+        UPDATE MEDIC_USER
+        SET IS_ACTIVE = #{toggle}
+        WHERE ID = #{accountId}
+    </update>
+
+    <update id="modifyAccountData">
+        UPDATE MEDIC_USER
+        SET NAME = #{name},
+        SEX = #{sex},
+        EMAIL = #{email},
+        PHONE_NUMBER = #{phoneNumber},
+        ADDRESS = #{address},
+        ACCOUNT_ROLE = #{accountRole},
+        ACCOUNT_KEY = #{accountKey}
+        WHERE ID = #{accountId}
+    </update>
+
+    <select id="getAllAccountIdsByOrgId" resultType="int">
+        SELECT id FROM MEDIC_USER
+        WHERE IS_DELETED = 'N'
+        AND ORG_ID = #{orgId}
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

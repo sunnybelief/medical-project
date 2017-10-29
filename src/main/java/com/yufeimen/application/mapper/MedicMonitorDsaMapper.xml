@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yufeimen.application.mapper.MedicMonitorDsaMapper">
+    <resultMap id="BaseResultMap" type="com.yufeimen.application.model.MedicMonitorDsa">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_creator" property="gmtCreator" jdbcType="VARCHAR"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updator" property="gmtUpdator" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
+        <result column="accident_id" property="accidentId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="has_accident" property="hasAccident" jdbcType="CHAR"/>
+        <result column="equipment_id" property="equipmentId" jdbcType="INTEGER"/>
+        <result column="equipment_category" property="equipmentCategory" jdbcType="VARCHAR"/>
+        <result column="report_org_id" property="reportOrgId" jdbcType="INTEGER"/>
+        <result column="report_org_name" property="reportOrgName" jdbcType="VARCHAR"/>
+        <result column="used_office_select" property="usedOfficeSelect" jdbcType="VARCHAR"/>
+        <result column="used_office_other" property="usedOfficeOther" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="patient_sex" property="patientSex" jdbcType="INTEGER"/>
+        <result column="patient_age_select" property="patientAgeSelect" jdbcType="VARCHAR"/>
+        <result column="patient_age_y" property="patientAgeY" jdbcType="INTEGER"/>
+        <result column="patient_age_u" property="patientAgeU" jdbcType="VARCHAR"/>
+        <result column="patient_age_b" property="patientAgeB" jdbcType="VARCHAR"/>
+        <result column="check_in_number" property="checkInNumber" jdbcType="VARCHAR"/>
+        <result column="diagnosis" property="diagnosis" jdbcType="VARCHAR"/>
+        <result column="operation_name" property="operationName" jdbcType="VARCHAR"/>
+        <result column="equipment_exposure" property="equipmentExposure" jdbcType="VARCHAR"/>
+        <result column="equipment_duration" property="equipmentDuration" jdbcType="VARCHAR"/>
+        <result column="equipment_start_time" property="equipmentStartTime" jdbcType="VARCHAR"/>
+        <result column="equipment_end_time" property="equipmentEndTime" jdbcType="VARCHAR"/>
+        <result column="injector_name" property="injectorName" jdbcType="VARCHAR"/>
+        <result column="injector_factory" property="injectorFactory" jdbcType="VARCHAR"/>
+        <result column="injector_spec" property="injectorSpec" jdbcType="VARCHAR"/>
+        <result column="injector_how_use" property="injectorHowUse" jdbcType="VARCHAR"/>
+        <result column="injector_start_time" property="injectorStartTime" jdbcType="VARCHAR"/>
+        <result column="injector_end_time" property="injectorEndTime" jdbcType="VARCHAR"/>
+        <result column="accident_desktop_select" property="accidentDesktopSelect" jdbcType="VARCHAR"/>
+        <result column="accident_desktop_other" property="accidentDesktopOther" jdbcType="VARCHAR"/>
+        <result column="accident_c_select" property="accidentCSelect" jdbcType="VARCHAR"/>
+        <result column="accident_c_other" property="accidentCOther" jdbcType="VARCHAR"/>
+        <result column="accident_img_select" property="accidentImgSelect" jdbcType="VARCHAR"/>
+        <result column="accident_img_other" property="accidentImgOther" jdbcType="VARCHAR"/>
+        <result column="accident_bed_select" property="accidentBedSelect" jdbcType="VARCHAR"/>
+        <result column="accident_part_select" property="accidentPartSelect" jdbcType="VARCHAR"/>
+        <result column="accident_part_other" property="accidentPartOther" jdbcType="VARCHAR"/>
+        <result column="accident_6_select" property="accident6Select" jdbcType="VARCHAR"/>
+        <result column="accident_6_other" property="accident6Other" jdbcType="VARCHAR"/>
+        <result column="accident_7_select" property="accident7Select" jdbcType="VARCHAR"/>
+        <result column="accident_7_other" property="accident7Other" jdbcType="VARCHAR"/>
+        <result column="reportor_id" property="reportorId" jdbcType="INTEGER"/>
+        <result column="reportor_name" property="reportorName" jdbcType="VARCHAR"/>
+        <result column="flow_log" property="flowLog" jdbcType="LONGVARCHAR"/>
+        <result column="evaluate_brief" property="evaluateBrief" jdbcType="LONGVARCHAR"/>
+        <result column="evaluator_name" property="evaluatorName" jdbcType="VARCHAR"/>
+        <result column="evaluator_id" property="evaluatorId" jdbcType="INTEGER"/>
+        <result column="quality_evaluate_name" property="qualityEvaluateName" jdbcType="VARCHAR"/>
+        <result column="quality_evaluate_id" property="qualityEvaluateId" jdbcType="INTEGER"/>
+        <result column="quality_status" property="qualityStatus" jdbcType="VARCHAR"/>
+        <result column="quality_hand_grade_total" property="qualityHandGradeTotal" jdbcType="INTEGER"/>
+        <result column="quality_hand_grade_JSON" property="qualityHandGradeJSON" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithHigherInfo" type="com.yufeimen.application.model.MedicMonitorDsaWithHigherOrg"
+               extends="BaseResultMap">
+        <result column="higher_org_name" property="higherOrgName" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <insert id="insertDSAObserveReport" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.yufeimen.application.model.MedicMonitorDsa">
+        insert into MEDIC_MONITOR_DSA (
+          id,
+          gmt_created,
+          gmt_creator,
+          gmt_updated,
+          gmt_updator,
+          is_deleted,
+          accident_id,
+          status,
+          has_accident,
+          equipment_id,
+          equipment_category,
+          report_org_id,
+          report_org_name,
+          used_office_select,
+          used_office_other,
+          patient_name,
+          patient_sex,
+          patient_age_select,
+          patient_age_y,
+          patient_age_u,
+          patient_age_b,
+          check_in_number,
+          diagnosis,
+          operation_name,
+          equipment_exposure,
+          equipment_duration,
+          equipment_start_time,
+          equipment_end_time,
+          injector_name,
+          injector_factory,
+          injector_spec,
+          injector_how_use,
+          injector_start_time,
+          injector_end_time,
+          accident_desktop_select,
+          accident_desktop_other,
+          accident_c_select,
+          accident_c_other,
+          accident_img_select,
+          accident_img_other,
+          accident_bed_select,
+          accident_part_select,
+          accident_part_other,
+          accident_6_select,
+          accident_6_other,
+          accident_7_select,
+          accident_7_other,
+          reportor_id,
+          reportor_name,
+          flow_log,
+          evaluate_brief,
+          evaluator_name,
+          evaluator_id,
+          quality_evaluate_name,
+          quality_evaluate_id,
+          quality_status)
+        values (
+            NULL,
+            #{gmtCreated},
+            #{gmtCreator},
+            #{gmtUpdated},
+            #{gmtUpdator},
+            #{isDeleted},
+            #{accidentId},
+            #{status},
+            #{hasAccident},
+            #{equipmentId},
+            #{equipmentCategory},
+            #{reportOrgId},
+            #{reportOrgName},
+            #{usedOfficeSelect},
+            #{usedOfficeOther},
+            #{patientName},
+            #{patientSex},
+            #{patientAgeSelect},
+            #{patientAgeY},
+            #{patientAgeU},
+            #{patientAgeB},
+            #{checkInNumber},
+            #{diagnosis},
+            #{operationName},
+            #{equipmentExposure},
+            #{equipmentDuration},
+            #{equipmentStartTime},
+            #{equipmentEndTime},
+            #{injectorName},
+            #{injectorFactory},
+            #{injectorSpec},
+            #{injectorHowUse},
+            #{injectorStartTime},
+            #{injectorEndTime},
+            #{accidentDesktopSelect},
+            #{accidentDesktopOther},
+            #{accidentCSelect},
+            #{accidentCOther},
+            #{accidentImgSelect},
+            #{accidentImgOther},
+            #{accidentBedSelect},
+            #{accidentPartSelect},
+            #{accidentPartOther},
+            #{accident6Select},
+            #{accident6Other},
+            #{accident7Select},
+            #{accident7Other},
+            #{reportorId},
+            #{reportorName},
+            #{flowLog},
+            #{evaluateBrief},
+            #{evaluatorName},
+            #{evaluatorId},
+            #{qualityEvaluateName},
+            #{qualityEvaluateId},
+            '未评估')
+    </insert>
+
+    <update id="updateDSAObserveReport" parameterType="com.yufeimen.application.model.MedicMonitorDsa">
+        UPDATE MEDIC_MONITOR_DSA
+        SET gmt_created = #{gmtCreated},
+          gmt_creator = #{gmtCreator},
+          gmt_updated = #{gmtUpdated},
+          gmt_updator = #{gmtUpdator},
+          accident_id = #{accidentId},
+          status = #{status},
+          has_accident = #{hasAccident},
+          equipment_id = #{equipmentId},
+          equipment_category = #{equipmentCategory},
+          report_org_id = #{reportOrgId},
+          report_org_name = #{reportOrgName},
+          used_office_select = #{usedOfficeSelect},
+          used_office_other = #{usedOfficeOther},
+          patient_name = #{patientName},
+          patient_sex = #{patientSex},
+          patient_age_select = #{patientAgeSelect},
+          patient_age_y = #{patientAgeY},
+          patient_age_u = #{patientAgeU},
+          patient_age_b = #{patientAgeB},
+          check_in_number = #{checkInNumber},
+          diagnosis = #{diagnosis},
+          operation_name = #{operationName},
+          equipment_exposure = #{equipmentExposure},
+          equipment_duration = #{equipmentDuration},
+          equipment_start_time = #{equipmentStartTime},
+          equipment_end_time = #{equipmentEndTime},
+          injector_name = #{injectorName},
+          injector_factory = #{injectorFactory},
+          injector_spec = #{injectorSpec},
+          injector_how_use = #{injectorHowUse},
+          injector_start_time = #{injectorStartTime},
+          injector_end_time = #{injectorEndTime},
+          accident_desktop_select = #{accidentDesktopSelect},
+          accident_desktop_other = #{accidentDesktopOther},
+          accident_c_select = #{accidentCSelect},
+          accident_c_other = #{accidentCOther},
+          accident_img_select = #{accidentImgSelect},
+          accident_img_other = #{accidentImgOther},
+          accident_bed_select = #{accidentBedSelect},
+          accident_part_select = #{accidentPartSelect},
+          accident_part_other = #{accidentPartOther},
+          accident_6_select = #{accident6Select},
+          accident_6_other = #{accident6Other},
+          accident_7_select = #{accident7Select},
+          accident_7_other = #{accident7Other},
+          reportor_id = #{reportorId},
+          reportor_name = #{reportorName},
+          flow_log = #{flowLog},
+          evaluate_brief = #{evaluateBrief},
+          evaluator_name = #{evaluatorName},
+          evaluator_id = #{evaluatorId},
+          quality_evaluate_name = #{qualityEvaluateName},
+          quality_evaluate_id = #{qualityEvaluateId},
+          quality_status = '未评估'
+        WHERE ID = #{id}
+        AND IS_DELETED = 'N'
+    </update>
+
+    <select id="selectDSAObserveReport" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND ID = #{id}
+    </select>
+
+    <update id="updateDSAObserveReportAccidentId">
+        UPDATE MEDIC_MONITOR_DSA
+        SET accident_id = #{accidentId}
+        WHERE ID = #{id}
+        AND IS_DELETED = 'N'
+    </update>
+
+    <select id="queryDSAObserveTempReportByOrgId" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS = '暂存'
+        AND report_org_id = #{orgId}
+        <choose>
+            <when test="hasAccident == 'ALL'">
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </otherwise>
+        </choose>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryTempReportsByOrgId" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS = '暂存'
+        AND report_org_id = #{orgId}
+        <choose>
+            <when test="hasAccident == 'ALL'">
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </otherwise>
+        </choose>
+
+    </select>
+
+
+    <select id="queryDSAObserveTempReportInReportorIds" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS = '暂存'
+        <choose>
+            <when test="hasAccident == 'ALL'">
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </otherwise>
+        </choose>
+        AND reportor_id in
+        <foreach item="item" index="index" collection="reportorIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryTempReportsInReportorIds" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS = '暂存'
+        <choose>
+            <when test="hasAccident == 'ALL'">
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+                <if test="reportor != null and reportor != ''">
+                    AND REPORTOR_NAME LIKE CONCAT('%','${reportor}','%' )
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+                </if>
+            </otherwise>
+        </choose>
+        AND reportor_id in
+        <foreach item="item" index="index" collection="reportorIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <update id="deleteAllDSAObserveTempReport">
+        UPDATE MEDIC_MONITOR_DSA
+        SET IS_DELETED = 'Y'
+        WHERE STATUS = '暂存'
+    </update>
+
+    <update id="deleteDSAObserveReportById">
+        UPDATE MEDIC_MONITOR_DSA
+        SET IS_DELETED = 'Y'
+        WHERE  ID= #{observeId}
+    </update>
+
+    <select id="queryHaveSendObserveReportByConditionsAndOrgId" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND report_org_id = #{orgId}
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryHaveSendReportsByOrgId" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND report_org_id = #{orgId}
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+    </select>
+
+
+    <select id="queryHaveSendObserveReportInReportorIds" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        AND reportor_id in
+        <foreach item="item" index="index" collection="reportorIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+
+    <select id="countTotalQueryHaveSendReportsInReportorIds" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        AND reportor_id in
+        <foreach item="item" index="index" collection="reportorIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="queryLowerObserveReportByConditions" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="reportOrgName != null and reportOrgName != ''">
+            AND REPORT_ORG_NAME LIKE CONCAT('%','${reportOrgName}','%' )
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        <if test="lowHospitalIds != null and lowHospitalIds.size()>0">
+            AND report_org_id in
+            <foreach item="item" index="index" collection="lowHospitalIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryLowerReports" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        <choose>
+            <when test="status == '全部状态'">
+                AND STATUS <![CDATA[ <> ]]> '暂存'
+            </when>
+            <otherwise>
+                AND STATUS LIKE CONCAT('%','${status}','%' )
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="reportOrgName != null and reportOrgName != ''">
+            AND REPORT_ORG_NAME LIKE CONCAT('%','${reportOrgName}','%' )
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        <if test="lowHospitalIds != null and lowHospitalIds.size()>0">
+            AND report_org_id in
+            <foreach item="item" index="index" collection="lowHospitalIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="queryAllObserveReportByConditions" resultMap="BaseResultMap">
+        SELECT * FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS <![CDATA[ <> ]]> '暂存'
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="reportOrgName != null and reportOrgName != ''">
+            AND REPORT_ORG_NAME LIKE CONCAT('%','${reportOrgName}','%' )
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        <if test="lowHospitalIds != null and lowHospitalIds.size()>0">
+            AND report_org_id in
+            <foreach item="item" index="index" collection="lowHospitalIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countTotalQueryAllReports" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE IS_DELETED = 'N'
+        AND STATUS <![CDATA[ <> ]]> '暂存'
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND HAS_ACCIDENT = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <if test="observeId != null and observeId != ''">
+            AND ID = #{observeId}
+        </if>
+        <if test="reportOrgName != null and reportOrgName != ''">
+            AND REPORT_ORG_NAME LIKE CONCAT('%','${reportOrgName}','%' )
+        </if>
+        <if test="patientName != null and patientName != ''">
+            AND PATIENT_NAME LIKE CONCAT('%','${patientName}','%' )
+        </if>
+        <if test="startDate != null and startDate != ''">
+            AND GMT_UPDATED &gt;= #{startDate} and GMT_UPDATED &lt;= #{endDate}
+        </if>
+        <if test="lowHospitalIds != null and lowHospitalIds.size()>0">
+            AND report_org_id in
+            <foreach item="item" index="index" collection="lowHospitalIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+
+    <update id="updateDSAObserveEvaluateInfo">
+        UPDATE MEDIC_MONITOR_DSA
+        SET EVALUATE_BRIEF = #{evaluateBrief},
+            EVALUATOR_NAME = #{evaluatorName},
+            EVALUATOR_ID = #{evaluatorId}
+        WHERE Id = #{observeId}
+    </update>
+
+    <update id="updateDSAObserveStatus">
+        UPDATE MEDIC_MONITOR_DSA
+        SET STATUS = #{status}
+        WHERE Id = #{observeId}
+    </update>
+
+    <update id="updateDSAReportEvaluateInfoByObserveId">
+        UPDATE MEDIC_MONITOR_DSA
+        SET evaluator_id = #{evaluatorId},
+        evaluator_name = #{evaluatorName}
+        WHERE Id = #{observeId}
+    </update>
+
+    <update id="updateDSAReportQualityInfoByObserveId">
+        UPDATE MEDIC_MONITOR_DSA
+        SET quality_evaluate_id = #{qualityEvaluateId},
+        quality_evaluate_name = #{qualityEvaluateName}
+        WHERE Id = #{observeId}
+    </update>
+
+    <select id="doSampleAction" resultType="int">
+        SELECT MEDIC_MONITOR_DSA.id FROM MEDIC_MONITOR_DSA
+        LEFT JOIN MEDIC_ORGANIZATION
+        ON MEDIC_ORGANIZATION.id = MEDIC_MONITOR_DSA.report_org_id
+        WHERE MEDIC_MONITOR_DSA.is_deleted = 'N'
+        AND MEDIC_MONITOR_DSA.status = '已评价'
+        <if test="startDate != null and startDate != ''">
+            AND MEDIC_MONITOR_DSA.gmt_updated &gt;= #{startDate} and MEDIC_MONITOR_DSA.gmt_updated &lt;= #{endDate}
+        </if>
+
+        <choose>
+            <when test="hasAccident == 'ALL'">
+            </when>
+            <otherwise>
+                AND MEDIC_MONITOR_DSA.has_accident = #{hasAccident}
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="orgRange == -1">
+            </when>
+            <otherwise>
+                AND MEDIC_ORGANIZATION.higher_org = #{orgRange}
+            </otherwise>
+        </choose>
+        ORDER BY RAND() LIMIT #{sampleCount}
+    </select>
+
+    <select id="queryDSAObserveReportInIds" resultMap="ResultMapWithHigherInfo">
+        SELECT RPT.* ,ORG2.org_name as higher_org_name
+        FROM MEDIC_MONITOR_DSA as RPT, MEDIC_ORGANIZATION as ORG1, MEDIC_ORGANIZATION as ORG2
+        WHERE RPT.report_org_id = ORG1.id
+        AND ORG1.higher_org = ORG2.id
+        AND RPT.is_deleted = 'N'
+        AND RPT.status = '已评价'
+        AND RPT.quality_status = #{evaluateStatus}
+        AND RPT.id in
+        <foreach item="item" index="index" collection="reportIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY ID DESC
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="countDSAObserveReportInIds" resultType="int">
+        SELECT COUNT(*)
+        FROM MEDIC_MONITOR_DSA as RPT, MEDIC_ORGANIZATION as ORG1, MEDIC_ORGANIZATION as ORG2
+        WHERE RPT.report_org_id = ORG1.id
+        AND ORG1.higher_org = ORG2.id
+        AND RPT.is_deleted = 'N'
+        AND RPT.status = '已评价'
+        AND RPT.quality_status = '未评估'
+        AND RPT.quality_status = #{evaluateStatus}
+        AND RPT.id in
+        <foreach item="item" index="index" collection="reportIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="submitDSAReportQualityEvaluateDataByObserveId">
+        UPDATE MEDIC_MONITOR_DSA
+        SET quality_hand_grade_total = #{qualityHandGradeTotal},
+        quality_hand_grade_JSON = #{qualityHandGradeJSON},
+        quality_status='已评估'
+        WHERE Id = #{observeId}
+    </update>
+
+    <select id="countQualityEvaluateNotFinishedNumber" resultType="int">
+        SELECT COUNT(*) FROM MEDIC_MONITOR_DSA
+        WHERE quality_status = '未评估'
+        AND is_deleted = 'N'
+        AND id in
+        <foreach item="item" index="index" collection="reportIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>
