@@ -784,5 +784,19 @@
         </foreach>
     </select>
 
+    <update id="resetQualityStatusData">
+        UPDATE MEDIC_MONITOR_DSA
+        SET quality_evaluate_name = null,
+        quality_evaluate_id = null,
+        quality_status = '未评估',
+        quality_hand_grade_JSON = null,
+        quality_hand_grade_total = null
+        WHERE id in
+        <foreach item="item" index="index" collection="reportIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </update>
+
 
 </mapper>

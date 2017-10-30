@@ -87,6 +87,12 @@ public class QualityController {
 
     /**
      * 删除指定的评估方案：id
+     * 删除评估方案之后，应该将该评估方案下的所有检测报告的状态改为未评估
+     * `quality_evaluate_name` varchar(128) DEFAULT NULL COMMENT '质量评估人姓名',
+     * `quality_evaluate_id` int(10) DEFAULT NULL COMMENT '质量评估人ID',
+     * `quality_status` varchar(128) NOT NULL DEFAULT '未评估' COMMENT '质量评估状态，直接存中文:未评估，已评估',
+     * `quality_hand_grade_JSON` text COMMENT '质量评估人工打分JSON串',
+     * `quality_hand_grade_total` int(10) DEFAULT NULL COMMENT '质量评估人工打分总分',
      *
      * @param id
      * @param request
@@ -99,6 +105,7 @@ public class QualityController {
     boolean deleteQualityEvaluateSchemeTitle(@RequestParam(value = "id") Integer id,
                                              HttpServletRequest request, HttpServletResponse response) {
         qualityServiceFacade.deleteQualityEvaluateSchemeTitle(id);
+
         return true;
 
     }

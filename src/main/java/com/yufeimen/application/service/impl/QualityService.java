@@ -76,13 +76,38 @@ public class QualityService implements QualityServiceFacade {
     }
 
     /**
-     * 删除指定ID的评估方案
+     * 删除指定的评估方案：id
+     * 删除评估方案之后，应该将该评估方案下的所有检测报告的状态改为未评估
+     * `quality_evaluate_name` varchar(128) DEFAULT NULL COMMENT '质量评估人姓名',
+     * `quality_evaluate_id` int(10) DEFAULT NULL COMMENT '质量评估人ID',
+     * `quality_status` varchar(128) NOT NULL DEFAULT '未评估' COMMENT '质量评估状态，直接存中文:未评估，已评估',
+     * `quality_hand_grade_JSON` text COMMENT '质量评估人工打分JSON串',
+     * `quality_hand_grade_total` int(10) DEFAULT NULL COMMENT '质量评估人工打分总分',
      *
      * @param id
+     * @return
      */
     @Override
     public void deleteQualityEvaluateSchemeTitle(Integer id) {
+        //查询到指定ID的评估方案对应的报告序列
+        MedicQualitySchemeTitle schemeTitle = medicQualitySchemeTitleMapper.selectByPrimaryKey(id);
+        List<MedicMonitorDsaWithHigherOrg> resultList = new ArrayList<>();
+        if (null == schemeTitle) {
+            return;
+        }
+        String[] idList = schemeTitle.getMonitorIds().split(",");
+        List<Long> reportIds = new ArrayList<>();
+        for (int i = 0; i < idList.length; i++) {
+            reportIds.add(Long.parseLong(idList[i]));
+        }
+        if (reportIds.size() == 0) {
+            return;
+        }
+        //重置这些被抽样的报告的评估状态和其他相关的评估数据。置空的字段如上面的注释所示
+        medicMonitorDsaMapper.resetQualityStatusData(reportIds);
+        //删除指定的评估方案
         medicQualitySchemeTitleMapper.deleteByPrimaryKey(id);
+
     }
 
     /**

@@ -168,5 +168,7 @@ public interface MedicMonitorDsaMapper {
 
     int countQualityEvaluateNotFinishedNumber(@Param("reportIds") List<Long> reportIds);
 
+    void resetQualityStatusData(@Param("reportIds") List<Long> reportIds);
+
 
 }
